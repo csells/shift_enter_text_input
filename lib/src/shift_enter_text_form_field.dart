@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'shift_enter_text_field.dart';
 
+/// A [FormField] wrapper that wires Shift+Enter submit semantics into form
+/// validation flows.
 class ShiftEnterTextFormField extends FormField<String> {
+  /// Creates a [ShiftEnterTextFormField] that mirrors [TextFormField]'s API.
   ShiftEnterTextFormField({
     super.key,
     TextEditingController? controller,

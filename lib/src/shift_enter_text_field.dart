@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// A Material [TextField] variant that reserves Shift+Enter for inserting
+/// newlines and treats Enter as submit.
 class ShiftEnterTextField extends StatefulWidget {
+  /// Creates a [ShiftEnterTextField].
+  ///
+  /// The constructor mirrors [TextField] while layering in Shift+Enter logic.
+  /// See [TextField] for parameter behavior.
   const ShiftEnterTextField({
     super.key,
     this.controller,
@@ -10,10 +16,20 @@ class ShiftEnterTextField extends StatefulWidget {
     this.maxLines,
     this.onChanged,
   });
+
+  /// Controls the text being edited.
   final TextEditingController? controller;
+
+  /// Invoked when Enter is pressed without Shift.
   final ValueChanged<String>? onSubmitted;
+
+  /// Decoration applied to the underlying [TextField].
   final InputDecoration decoration;
+
+  /// Maximum line count for the field.
   final int? maxLines;
+
+  /// Called whenever the field's text changes.
   final ValueChanged<String>? onChanged;
 
   @override
@@ -24,9 +40,11 @@ class _ShiftEnterTextFieldState extends State<ShiftEnterTextField> {
   late final TextEditingController _controller =
       widget.controller ?? TextEditingController();
 
-  bool get _isShiftPressed =>
-      RawKeyboard.instance.keysPressed.contains(LogicalKeyboardKey.shiftLeft) ||
-      RawKeyboard.instance.keysPressed.contains(LogicalKeyboardKey.shiftRight);
+  bool get _isShiftPressed {
+    final keys = HardwareKeyboard.instance.logicalKeysPressed;
+    return keys.contains(LogicalKeyboardKey.shiftLeft) ||
+        keys.contains(LogicalKeyboardKey.shiftRight);
+  }
 
   @override
   Widget build(BuildContext context) => Shortcuts(

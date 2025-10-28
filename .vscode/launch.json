@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "example (material)",
+      "request": "launch",
+      "type": "dart",
+      "program": "example/main.dart"
+    },
+    {
+      "name": "example (cupertino)",
+      "request": "launch",
+      "type": "dart",
+      "program": "example/main_cupertino.dart"
+    }
+  ]
+}

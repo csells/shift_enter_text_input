@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
+
 import 'cupertino_shift_enter_text_field.dart';
 
+/// A [FormField] wrapper for [CupertinoShiftEnterTextField].
 class CupertinoShiftEnterTextFormField extends FormField<String> {
+  /// Creates a [CupertinoShiftEnterTextFormField] that syncs with a
+  /// [TextEditingController] and reports submission via [onFieldSubmitted].
   CupertinoShiftEnterTextFormField({
     super.key,
     TextEditingController? controller,
