@@ -1,0 +1,19 @@
+name: shift_enter_text_input
+description: |-
+  Drop-in TextField and TextFormField replacements that support Shift+Enter for
+  newline and Enter for submit, across Material and Cupertino widgets.
+version: 0.1.0
+
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  all_lint_rules_community: ^0.0.43
