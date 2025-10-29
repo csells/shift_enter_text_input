@@ -8,27 +8,65 @@ class ExampleApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => const CupertinoApp(
-    home: CupertinoPageScaffold(
+    home: CupertinoDemoPage(),
+  );
+}
+
+class CupertinoDemoPage extends StatefulWidget {
+  const CupertinoDemoPage({super.key});
+
+  @override
+  State<CupertinoDemoPage> createState() => _CupertinoDemoPageState();
+}
+
+class _CupertinoDemoPageState extends State<CupertinoDemoPage> {
+  final TextEditingController _controller = TextEditingController();
+  String _submitted = '';
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _handleSubmit([String? value]) {
+    final text = value ?? _controller.text;
+    setState(() {
+      _submitted = text;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => CupertinoPageScaffold(
+    navigationBar: const CupertinoNavigationBar(
+      middle: Text('Shift+Enter Demo: Cupertino'),
+    ),
+    child: SafeArea(
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Shift+Enter Demo: Cupertino'),
-            SizedBox(height: 8),
-            CupertinoTextFieldDemo(),
+            CupertinoShiftEnterTextField(
+              controller: _controller,
+              placeholder: 'Type message...',
+              onSubmitted: _handleSubmit,
+            ),
+            const SizedBox(height: 12),
+            CupertinoButton.filled(
+              onPressed: _handleSubmit,
+              child: const Text('Submit'),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              _submitted.isEmpty
+                  ? 'Submitted: (none)'
+                  : 'Submitted: $_submitted',
+              style: CupertinoTheme.of(context).textTheme.textStyle,
+            ),
           ],
         ),
       ),
     ),
-  );
-}
-
-class CupertinoTextFieldDemo extends StatelessWidget {
-  const CupertinoTextFieldDemo({super.key});
-
-  @override
-  Widget build(BuildContext context) => CupertinoShiftEnterTextField(
-    placeholder: 'Cupertino style...',
-    onSubmitted: (v) => debugPrint('Cupertino submitted: $v'),
   );
 }

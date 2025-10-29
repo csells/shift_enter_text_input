@@ -17,3 +17,5 @@ flutter:
 dev_dependencies:
   all_lint_rules_community: ^0.0.43
   flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
