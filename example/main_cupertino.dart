@@ -47,10 +47,13 @@ class _CupertinoDemoPageState extends State<CupertinoDemoPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            CupertinoShiftEnterTextField(
-              controller: _controller,
-              placeholder: 'Type message...',
-              onSubmitted: _handleSubmit,
+            Expanded(
+              child: CupertinoShiftEnterTextField(
+                controller: _controller,
+                placeholder: 'Type message...',
+                maxLines: null,
+                onSubmitted: _handleSubmit,
+              ),
             ),
             const SizedBox(height: 12),
             CupertinoButton.filled(

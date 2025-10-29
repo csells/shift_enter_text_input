@@ -16,6 +16,11 @@ class CupertinoShiftEnterTextField extends StatefulWidget {
     this.controller,
     this.placeholder,
     this.onSubmitted,
+    this.onChanged,
+    this.focusNode,
+    this.maxLines,
+    this.textInputAction,
+    this.enabled = true,
   });
 
   /// Controls the text being edited.
@@ -26,6 +31,21 @@ class CupertinoShiftEnterTextField extends StatefulWidget {
 
   /// Called when Enter is pressed without Shift.
   final ValueChanged<String>? onSubmitted;
+
+  /// Called whenever the field's text changes.
+  final ValueChanged<String>? onChanged;
+
+  /// Optional focus node for the text field.
+  final FocusNode? focusNode;
+
+  /// Maximum line count for the field. Set to `null` for multiline input.
+  final int? maxLines;
+
+  /// Action button to display on the soft keyboard.
+  final TextInputAction? textInputAction;
+
+  /// Whether the field is enabled.
+  final bool enabled;
 
   @override
   State<CupertinoShiftEnterTextField> createState() =>
@@ -97,7 +117,12 @@ class _CupertinoShiftEnterTextFieldState
         },
         child: CupertinoTextField(
           controller: _controller,
+          focusNode: widget.focusNode,
+          maxLines: widget.maxLines,
           placeholder: widget.placeholder,
+          onChanged: widget.onChanged,
+          enabled: widget.enabled,
+          textInputAction: widget.textInputAction,
           onSubmitted: (v) {
             if (!_isShiftPressed) _handleSubmit(v);
           },
